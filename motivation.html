@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>제작 동기 - science 4 all</title>
+    <style>
+        body {
+            margin: 0; padding: 0; background-color: #ADD8E6; /* 연한 파란색 배경 */
+            height: 100vh; display: flex; justify-content: center; align-items: flex-end;
+            font-family: 'Malgun Gothic', sans-serif; position: relative;
+        }
+
+        /* 흰색 컨테이너: 양옆 60pt, 위 30pt 여백 */
+        .white-container {
+            background-color: white;
+            width: calc(100% - 120pt); height: calc(100% - 30pt);
+            border-top-left-radius: 20px; border-top-right-radius: 20px;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 100px 40px 40px 40px; /* 타이틀 박스 공간 확보를 위한 상단 패딩 */
+            box-sizing: border-box; text-align: center; overflow-y: auto;
+        }
+
+        /* 상아색 글상자 (위에서 20pt) */
+        .title-box {
+            position: absolute; top: 20pt; left: 50%; transform: translateX(-50%);
+            background-color: #FFFDD0; padding: 5px 40px; border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 10;
+        }
+        .title-text { font-size: 40pt; font-weight: bold; margin: 0; color: #333; white-space: nowrap; }
+
+        /* 동기 내용 스타일 */
+        .content-area {
+            max-width: 800px; line-height: 1.8; font-size: 18px; color: #444;
+            word-break: keep-all;
+        }
+        .highlight { color: #007BFF; font-weight: bold; }
+        
+        .back-btn {
+            margin-top: 40px; background-color: #ADD8E6; color: #333; border: none;
+            padding: 30px 60px; border-radius: 15px; cursor: pointer; font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title-box">
+        <p class="title-text">이 사이트의 제작 동기</p>
+    </div>
+
+    <div class="white-container">
+        <div class="content-area">
+            <p>
+                모두를 위한 과학, <span class="highlight">science 4 all</span>은 복잡하고 어렵게만 느껴지는 과학을 
+                일상 속으로 가져오기 위해 시작되었습니다. 
+            </p>
+            <p>
+                우리는 학생들이 내신 공부를 체계적으로 관리하고(<span class="highlight">S 4 내신</span>), 
+                과학적인 시각으로 일상을 바라보며(<span class="highlight">S 4 일상</span>), 
+                서로의 생각을 자유롭게 공유하는(<span class="highlight">S 4 생활</span>) 공간을 꿈꿉니다.
+            </p>
+            <p>
+                이 사이트는 단순한 정보 전달을 넘어, 과학이 우리 삶의 일부가 되는 경험을 제공하고자 합니다. 
+                여러분의 호기심이 모여 더 큰 발견을 만들어낼 수 있도록 최선을 다하겠습니다.
+            </p>
+        </div>
+        
+        <button class="back-btn" onclick="history.back()">메인으로 돌아가기</button>
+    </div>
+
+</body>
+</html>

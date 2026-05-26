@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>S 4 내신 - science 4 all</title>
+    <style>
+        body {
+            margin: 0; padding: 0; background-color: #FF8C00; /* 주황색 배경 */
+            height: 100vh; display: flex; justify-content: center; align-items: flex-end;
+            font-family: 'Malgun Gothic', sans-serif; position: relative;
+        }
+
+        /* 흰색 컨테이너: 양옆 60pt, 위 30pt 여백 */
+        .white-container {
+            background-color: white;
+            width: calc(100% - 120pt); height: calc(100% - 30pt);
+            border-top-left-radius: 20px; border-top-right-radius: 20px;
+            position: relative; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; /* 내용 중앙 정렬 */
+            padding: 20px; box-sizing: border-box;
+        }
+
+        /* 상아색 글상자 (위에서 20pt) */
+        .title-box {
+            position: absolute; top: 20pt; left: 50%; transform: translateX(-50%);
+            background-color: #FFFDD0; padding: 5px 40px; border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 10;
+        }
+        .title-text { font-size: 40pt; font-weight: bold; margin: 0; color: #333; }
+
+        /* 표 스타일 */
+        table { border-collapse: collapse; width: 90%; margin-bottom: 20px; background: white; }
+        th, td { border: 1px solid #ccc; padding: 12px; text-align: center; }
+        th { background-color: #f8f8f8; font-weight: bold; }
+        input { width: 90%; border: 1px solid #eee; padding: 5px; text-align: center; }
+
+        /* 버튼 컨테이너 */
+        .btn-group { display: flex; gap: 15px; }
+        .gray-btn {
+            background-color: #808080; color: white; border: none;
+            padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px;
+        }
+        .gray-btn:hover { background-color: #666; }
+    </style>
+</head>
+<body>
+
+    <div class="title-box">
+        <p class="title-text">S 4 내신</p>
+    </div>
+
+    <div class="white-container">
+        <table id="plan-table">
+            <thead>
+                <tr>
+                    <th>요일</th>
+                    <th>학습과목</th>
+                    <th>학습계획량</th>
+                    <th>학습 시간</th>
+                    <th>수행 여부</th>
+                </tr>
+            </thead>
+            <tbody id="plan-body">
+                </tbody>
+        </table>
+
+        <div class="btn-group">
+            <button class="gray-btn" onclick="addRow()">일정 생성하기</button>
+            <button class="gray-btn" onclick="removeRow()">일정 삭제하기</button>
+            <button class="gray-btn" onclick="saveData()">계획 저장하기</button>
+        </div>
+    </div>
+
+    <script>
+        const tbody = document.getElementById('plan-body');
+
+        // 행 추가 함수
+        function addRow(data = {day:'', subject:'', amount:'', time:'', status:''}) {
+            const row = tbody.insertRow();
+            row.innerHTML = `
+                <td><input type="text" value="${data.day}"></td>
+                <td><input type="text" value="${data.subject}"></td>
+                <td><input type="text" value="${data.amount}"></td>
+                <td><input type="text" value="${data.time}"></td>
+                <td><input type="text" value="${data.status}"></td>
+            `;
+        }
+
+        // 행 삭제 함수 (최초 행 보호)
+        function removeRow() {
+            if (tbody.rows.length > 0) {
+                tbody.deleteRow(-1);
+            }
+        }
+
+        // 데이터 저장 및 불러오기 (백엔드 연동)
+        async function saveData() {
+            const rows = Array.from(tbody.rows).map(row => {
+                const inputs = row.querySelectorAll('input');
+                return {
+                    day: inputs[0].value,
+                    subject: inputs[1].value,
+                    amount: inputs[2].value,
+                    time: inputs[3].value,
+                    status: inputs[4].value
+                };
+            });
+
+            // 여기에 백엔드 API 호출 (예: /api/save-plan)
+            console.log("저장될 데이터:", rows);
+            alert("데이터베이스에 저장 요청을 보냈습니다.");
+        }
+
+        // 페이지 로드 시 데이터 불러오기 예시
+        window.onload = () => {
+            // 실제 구현 시 fetch('/api/get-plan')를 통해 데이터를 가져옵니다.
+            // 데이터가 없다면 빈 행 하나를 생성합니다.
+            addRow(); 
+        };
+    </script>
+</body>
+</html>

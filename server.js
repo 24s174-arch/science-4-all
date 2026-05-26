@@ -4,14 +4,16 @@ const cors = require('cors');
 require('dotenv').config();
 const path = require('path');
 
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+
 app.get('/', (req, res) => {
   // __dirname이 서버 상의 절대 경로를 알아서 잡아줍니다.
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-const app = express();
-app.use(cors());
-app.use(express.json());
 
 // Neon DB 연결 설정
 const pool = new Pool({

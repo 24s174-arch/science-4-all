@@ -2,6 +2,12 @@ const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
 require('dotenv').config();
+const path = require('path');
+
+app.get('/', (req, res) => {
+  // __dirname이 서버 상의 절대 경로를 알아서 잡아줍니다.
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 const app = express();
 app.use(cors());

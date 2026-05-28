@@ -7,14 +7,21 @@ const path = require('path');
 const app = express();
 app.use(cors());
 app.use(express.json());
-const filePath = path.join(__dirname, 'index.html');
+
+// 1. public 폴더 안의 정적 파일들을 자동으로 서빙하도록 설정 (중요!)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Neon DB 연결 설정
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
 });
 
-// [로그인 API]
+// 2. 사용자가 '/' 또는 '/index.html'로 접속했을 때 public/index.html을 반환
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// [로그인 API] ... (이하 기존 코드 동일)
 app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
 

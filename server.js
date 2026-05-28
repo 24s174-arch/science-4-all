@@ -11,6 +11,11 @@ app.use(express.json());
 // 1. public 폴더 안의 정적 파일들을 자동으로 서빙하도록 설정 (중요!)
 app.use(express.static(path.join(__dirname, 'public')));
 
+const port = process.env.PORT || 10000;
+app.listen(port, () => {
+    console.log(`서버가 포트 ${port}에서 실행 중입니다.`);
+});
+
 // Neon DB 연결 설정
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,

@@ -15,10 +15,6 @@ const pool = new Pool({
 const fs = require('fs');
 const path = require('path');
 
-// 'data' 폴더 안에 'info.txt'가 있다고 가정할 때
-// __dirname은 현재 실행 중인 파일의 위치를 알려줍니다.
-const filePath = path.join(__dirname, 'science 4 all', 'index.html');
-
 app.get('/read-file', (req, res) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {

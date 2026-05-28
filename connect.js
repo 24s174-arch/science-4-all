@@ -15,6 +15,12 @@ const pool = new Pool({
 const fs = require('fs');
 const path = require('path');
 
+app.get('/', (req, res) => {
+    // __dirname은 현재 app.js가 있는 폴더 위치입니다.
+    // 여기서는 app.js와 같은 위치에 있는 index.html을 보낸다고 가정합니다.
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.get('/read-file', (req, res) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {

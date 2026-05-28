@@ -14,6 +14,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Neon DB 연결 설정
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false // Neon 등 클라우드 DB 연결 시 필수 설정
+    }
 });
 
 // 2. 사용자가 '/' 또는 '/index.html'로 접속했을 때 public/index.html을 반환

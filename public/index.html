@@ -99,54 +99,6 @@
             document.getElementById('login-section').style.display = isSignup ? 'none' : 'block';
             document.getElementById('signup-section').style.display = isSignup ? 'block' : 'none';
         }
-
-        // 인증 처리 (Neon DB 연동 로직이 들어갈 자리)
-        async function handleAuth(type) {
-    const idField = type === 'login' ? 'l-id' : 's-id';
-    const pwField = type === 'login' ? 'l-pw' : 's-pw';
-    
-    const id = document.getElementById(idField).value;
-    const pw = document.getElementById(pwField).value;
-
-    if(!id || !pw) return alert("정보를 모두 입력해주세요.");
-
-    // API 경로 설정 (로그인 또는 회원가입)
-    const endpoint = type === 'login' ? '/api/login' : '/api/signup';
-
-    try {
-        const response = await fetch(`http://localhost:10000${endpoint}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: id, password: pw })
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            alert(result.message);
-            
-            if (type === 'login') {
-                // 로그인 성공 시 사용자 이름을 저장하여 다른 페이지에서 사용
-                localStorage.setItem('username', result.username);
-                // 메인 페이지로 이동 (UI 전환)
-                showPage('main-page');
-                // 로그인 버튼을 사용자 이름으로 변경하는 등의 처리 가능
-                document.querySelector('.nav-login-btn').innerText = `${result.username}님`;
-            } else {
-                // 회원가입 성공 시 로그인 폼으로 전환
-                toggleAuthForm(false);
-            }
-        } else {
-            alert(result.message);
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("서버와 통신할 수 없습니다.");
-    }
-
-            if(!id || !pw) return alert("정보를 모두 입력해주세요.");
-
-        }
     
     </script>
 </body>
